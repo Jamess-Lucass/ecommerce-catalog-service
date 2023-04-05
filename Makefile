@@ -8,6 +8,10 @@ dev:
 format:
 	go fmt ./...
 
+.PHONY: seed
+seed:
+	dotenv -- go run ./database/seed
+
 .PHONY: lint-docker
 lint-docker:
 	docker run --rm --name ${PROJECT_NAME}-testing-client \
