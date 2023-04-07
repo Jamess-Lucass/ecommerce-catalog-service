@@ -30,3 +30,7 @@ func (s *CatalogService) Get(id uuid.UUID) (*models.Catalog, error) {
 
 	return &catalog, nil
 }
+
+func (s *CatalogService) Create(c *models.Catalog) error {
+	return s.db.Create(&c).Error
+}
