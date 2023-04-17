@@ -22,7 +22,7 @@ func Connect(log *zap.Logger) *gorm.DB {
 	user := os.Getenv("DB_USERNAME")
 	pass := os.Getenv("DB_PASSWORD")
 
-	dsn := fmt.Sprintf("host=%s user=%s password='%s' dbname=%s port=%d sslmode=disable", server, user, pass, name, port)
+	dsn := fmt.Sprintf("host=%s user=%s password='%s' dbname=%s port=%d", server, user, pass, name, port)
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
 		Logger: logger.Default.LogMode(logger.Info),
