@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerce-catalog-service-deployment
+spec:
+  template:
+    spec:
+      containers:
+        - name: ecommerce-catalog-service-container
+          env:
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: value
+            - name: DB_HOST
+              value: "ecommerce-catalog-service-postgres.default.svc"
+            - name: DB_PORT
+              value: "5432"
+            - name: DB_NAME
+              value: catalog
+            - name: DB_USERNAME
+              value: postgres
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres.ecommerce-catalog-service-postgres.credentials.postgresql.acid.zalan.do
+                  key: password

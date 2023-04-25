@@ -1,0 +1,45 @@
+kind: "postgresql"
+apiVersion: "acid.zalan.do/v1"
+metadata:
+  name: ecommerce-catalog-service-postgres
+  namespace: default
+  labels:
+    team: acid
+spec:
+  teamId: acid
+  postgresql:
+    version: "15"
+  numberOfInstances: 1
+  volume:
+    storageClass: "default"
+    size: "2Gi"
+  users:
+    developer: []
+  databases:
+    catalog: developer
+  resources:
+    requests:
+      cpu: 100m
+      memory: 100Mi
+    limits:
+      cpu: 500m
+      memory: 500Mi
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: ecommerce-catalog-service-postgres-network-policy
+spec:
+  podSelector:
+    matchLabels:
+      cluster-name: ecommerce-catalog-service-postgres # Set automatically by operator
+  policyTypes:
+    - Ingress
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: ecommerce-catalog-service-deployment
+      ports:
+        - protocol: TCP
+          port: 5432
