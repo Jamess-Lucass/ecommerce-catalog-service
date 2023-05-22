@@ -5,6 +5,7 @@ import (
 
 	"github.com/Jamess-Lucass/ecommerce-catalog-service/database"
 	"github.com/Jamess-Lucass/ecommerce-catalog-service/models"
+	"github.com/brianvoe/gofakeit/v6"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 )
@@ -13,11 +14,26 @@ func main() {
 	logger, _ := zap.NewProduction()
 	db := database.Connect(logger)
 
+	gofakeit.Seed(8675309)
+
 	if err := db.First(&models.Catalog{}).Error; errors.Is(err, gorm.ErrRecordNotFound) {
-		logger.Sugar().Infof("seeding data...")
+		items := []models.Catalog{}
 
-		db.Create(&models.Catalog{Name: "T-Shirt", Description: "A very cool new T-Shirt to purchase.", Price: 20.50})
+		for i := 1; i < 100_000; i++ {
+			item := models.Catalog{
+				Name:        gofakeit.LoremIpsumWord(),
+				Description: gofakeit.LoremIpsumSentence(10),
+				Price:       float32(gofakeit.Price(5, 100)),
+			}
 
-		db.Create(&models.Catalog{Name: "Jeans", Description: "Some brand spanking new jeans!", Price: 32.99})
+			items = append(items, item)
+		}
+
+		if err := db.CreateInBatches(items, 1_000).Error; err != nil {
+			logger.Sugar().Errorf("error occured while seeding data: %v", err)
+			return
+		}
+
+		logger.Sugar().Infof("Seeded data...")
 	}
 }
