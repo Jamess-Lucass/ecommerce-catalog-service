@@ -15,6 +15,7 @@ services:
       - DB_NAME=catalog
       - DB_USERNAME=postgres
       - DB_PASSWORD=test
+      - ENVIRONMENT=development
       - JWT_SECRET=DockerTestJWTFakeSecret
     depends_on:
       - postgres
