@@ -19,11 +19,19 @@ func main() {
 	if err := db.First(&models.Catalog{}).Error; errors.Is(err, gorm.ErrRecordNotFound) {
 		items := []models.Catalog{}
 
-		for i := 1; i < 100_000; i++ {
+		for i := 0; i < 100_000; i++ {
 			item := models.Catalog{
 				Name:        gofakeit.LoremIpsumWord(),
 				Description: gofakeit.LoremIpsumSentence(10),
 				Price:       float32(gofakeit.Price(5, 100)),
+			}
+
+			for j := 0; j < 3; j++ {
+				image := models.CatalogImage{
+					URL: gofakeit.ImageURL(500, 500),
+				}
+
+				item.Images = append(item.Images, image)
 			}
 
 			items = append(items, item)

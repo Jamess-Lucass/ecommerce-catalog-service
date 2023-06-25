@@ -1,12 +1,15 @@
 package handlers
 
 import (
+	"fmt"
+
 	"github.com/Jamess-Lucass/ecommerce-catalog-service/models"
 	"github.com/Jamess-Lucass/ecommerce-catalog-service/requests"
 	"github.com/Jamess-Lucass/ecommerce-catalog-service/utils"
 	"github.com/goatquery/goatquery-go"
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
+	"gorm.io/gorm"
 )
 
 var maxTop = 1_000
@@ -24,7 +27,10 @@ func (s *Server) GetAllCatalogItems(c *fiber.Ctx) error {
 	}
 
 	var items []models.Catalog
-	res, count, err := goatquery.Apply(s.catalogService.List(), query, &maxTop, nil)
+	res, count, err := goatquery.Apply(s.catalogService.List(), query, &maxTop, func(db *gorm.DB, term string) *gorm.DB {
+		t := fmt.Sprintf("%%%s%%", term)
+		return db.Where("name like ? or description like ?", t, t)
+	})
 	if err != nil {
 		return c.Status(400).JSON(goatquery.QueryErrorResponse{Status: 400, Message: err.Error()})
 	}

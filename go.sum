@@ -19,6 +19,8 @@ github.com/goatquery/goatquery-go v0.2.0 h1:IkNe1EPryThOdgYLmynHaaqSeQNwzF7SrOwj
 github.com/goatquery/goatquery-go v0.2.0/go.mod h1:wf9af0vu9rqy9ifVZqxKCPppm2U662GBYgEA18GrFBU=
 github.com/goatquery/goatquery-go v0.2.1 h1:ae0PiR6FX5iJzdKwwxD6c56qqpcEai8lRiw8iJOlet0=
 github.com/goatquery/goatquery-go v0.2.1/go.mod h1:wf9af0vu9rqy9ifVZqxKCPppm2U662GBYgEA18GrFBU=
+github.com/goatquery/goatquery-go v0.2.2 h1:wxY6fR6PcsqhTHQ83RJbe+66oPtZLA4FnNt4s2J8XcI=
+github.com/goatquery/goatquery-go v0.2.2/go.mod h1:wf9af0vu9rqy9ifVZqxKCPppm2U662GBYgEA18GrFBU=
 github.com/gofiber/contrib/fiberzap v1.0.2 h1:EQwhggtszVfIdBeXxN9Xrmld71es34Ufs+ef8VMqZxc=
 github.com/gofiber/contrib/fiberzap v1.0.2/go.mod h1:jGO8BHU4gRI9U0JtM6zj2CIhYfgVmW5JxziN8NTgVwE=
 github.com/gofiber/fiber/v2 v2.46.0 h1:wkkWotblsGVlLjXj2dpgKQAYHtXumsK/HyFugQM68Ns=

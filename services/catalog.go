@@ -17,7 +17,7 @@ func NewCatalogService(db *gorm.DB) *CatalogService {
 }
 
 func (s *CatalogService) List() *gorm.DB {
-	query := s.db.Model(models.Catalog{}).Where("is_deleted <> ?", true)
+	query := s.db.Model(models.Catalog{}).Preload("Images").Where("is_deleted <> ?", true)
 
 	return query
 }

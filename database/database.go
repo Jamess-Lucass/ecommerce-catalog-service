@@ -36,5 +36,5 @@ func Connect(log *zap.Logger) *gorm.DB {
 }
 
 func Migrate(db *gorm.DB) error {
-	return db.AutoMigrate(&models.Catalog{})
+	return db.AutoMigrate(&models.Catalog{}, &models.CatalogImage{})
 }
