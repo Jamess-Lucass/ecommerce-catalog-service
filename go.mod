@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/brianvoe/gofakeit/v6 v6.21.0
 	github.com/go-playground/validator/v10 v10.14.0
-	github.com/goatquery/goatquery-go v0.2.2
+	github.com/goatquery/goatquery-go v0.2.3
 	github.com/gofiber/contrib/fiberzap v1.0.2
 	github.com/gofiber/fiber/v2 v2.46.0
 	github.com/golang-jwt/jwt/v4 v4.5.0
@@ -13,7 +13,7 @@ require (
 	github.com/samber/lo v1.38.1
 	go.uber.org/zap v1.24.0
 	gorm.io/driver/postgres v1.5.2
-	gorm.io/gorm v1.25.1
+	gorm.io/gorm v1.25.2
 )
 
 require (
