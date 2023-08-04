@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/Jamess-Lucass/ecommerce-catalog-service/database"
 	"github.com/Jamess-Lucass/ecommerce-catalog-service/models"
@@ -13,6 +14,10 @@ import (
 func main() {
 	logger, _ := zap.NewProduction()
 	db := database.Connect(logger)
+
+	if err := database.Migrate(db); err != nil {
+		logger.Sugar().Errorf("error occured migrating database: %v", err)
+	}
 
 	gofakeit.Seed(8675309)
 
@@ -28,7 +33,7 @@ func main() {
 
 			for j := 0; j < 3; j++ {
 				image := models.CatalogImage{
-					URL: gofakeit.ImageURL(500, 500),
+					URL: fmt.Sprintf("https://picsum.photos/seed/%s/500/500", gofakeit.UUID()),
 				}
 
 				item.Images = append(item.Images, image)
