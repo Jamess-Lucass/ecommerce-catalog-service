@@ -3,6 +3,7 @@ package handlers
 import (
 	"fmt"
 
+	"github.com/Jamess-Lucass/ecommerce-catalog-service/middleware"
 	"github.com/Jamess-Lucass/ecommerce-catalog-service/models"
 	"github.com/Jamess-Lucass/ecommerce-catalog-service/requests"
 	"github.com/Jamess-Lucass/ecommerce-catalog-service/utils"
@@ -26,8 +27,10 @@ func (s *Server) GetAllCatalogItems(c *fiber.Ctx) error {
 		Filter:  c.Query("filter"),
 	}
 
+	user, _ := c.Locals("claims").(*middleware.Claim)
+
 	var items []models.Catalog
-	res, count, err := goatquery.Apply(s.catalogService.List(), query, &maxTop, func(db *gorm.DB, term string) *gorm.DB {
+	res, count, err := goatquery.Apply(s.catalogService.List(user), query, &maxTop, func(db *gorm.DB, term string) *gorm.DB {
 		t := fmt.Sprintf("%%%s%%", term)
 		return db.Where("name like ? or description like ?", t, t)
 	})
@@ -51,7 +54,9 @@ func (s *Server) GetCatalogItem(c *fiber.Ctx) error {
 		return c.Status(400).JSON(err.Error())
 	}
 
-	item, err := s.catalogService.Get(id)
+	user, _ := c.Locals("claims").(*middleware.Claim)
+
+	item, err := s.catalogService.Get(user, id)
 	if err != nil {
 		return c.Status(400).JSON(err.Error())
 	}

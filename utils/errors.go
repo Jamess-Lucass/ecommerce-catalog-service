@@ -11,6 +11,14 @@ import (
 	"gorm.io/gorm"
 )
 
+type Error struct {
+	Errors map[string][]string `json:"errors"`
+}
+
+func (m Error) Error() string {
+	return "boom"
+}
+
 type ErrorResponse struct {
 	Code    int                 `json:"code"`
 	Message string              `json:"message"`
@@ -22,6 +30,10 @@ func NewError(err error) ErrorResponse {
 
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		return ErrorResponse{Code: fiber.StatusNotFound, Message: "Resource not found"}
+	}
+
+	if errors, ok := err.(Error); ok {
+		e.Errors = errors.Errors
 	}
 
 	if validationErrors, ok := err.(validator.ValidationErrors); ok {

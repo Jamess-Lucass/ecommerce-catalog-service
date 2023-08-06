@@ -16,7 +16,7 @@ func main() {
 	db := database.Connect(logger)
 
 	if err := database.Migrate(db); err != nil {
-		logger.Sugar().Errorf("error occured migrating database: %v", err)
+		logger.Sugar().Fatalf("error occured migrating database: %v", err)
 	}
 
 	gofakeit.Seed(8675309)
