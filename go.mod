@@ -3,7 +3,7 @@ module github.com/Jamess-Lucass/ecommerce-catalog-service
 go 1.20
 
 require (
-	github.com/brianvoe/gofakeit/v6 v6.21.0
+	github.com/brianvoe/gofakeit/v6 v6.23.1
 	github.com/go-playground/validator/v10 v10.15.0
 	github.com/goatquery/goatquery-go v0.2.3
 	github.com/gofiber/contrib/fiberzap v1.0.2
