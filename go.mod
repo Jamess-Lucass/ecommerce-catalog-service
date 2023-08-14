@@ -13,7 +13,7 @@ require (
 	github.com/samber/lo v1.38.1
 	go.uber.org/zap v1.25.0
 	gorm.io/driver/postgres v1.5.2
-	gorm.io/gorm v1.25.2
+	gorm.io/gorm v1.25.3
 )
 
 require (
