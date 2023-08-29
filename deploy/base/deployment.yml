@@ -1,21 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ecommerce-catalog-service-deployment
+  name: ecommerce-catalog-service
   labels:
-    app: ecommerce-catalog-service-deployment
+    app: ecommerce-catalog-service
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ecommerce-catalog-service-deployment
+      app: ecommerce-catalog-service
   template:
     metadata:
       labels:
-        app: ecommerce-catalog-service-deployment
+        app: ecommerce-catalog-service
     spec:
       containers:
-        - name: ecommerce-catalog-service-container
+        - name: ecommerce-catalog-service
           image: ghcr.io/jamess-lucass/ecommerce-catalog-service:latest
           imagePullPolicy: Always
           ports:

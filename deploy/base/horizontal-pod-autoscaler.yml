@@ -1,12 +1,12 @@
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
-  name: ecommerce-catalog-service-hpa
+  name: ecommerce-catalog-service
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: ecommerce-catalog-service-deployment
+    name: ecommerce-catalog-service
   minReplicas: 1
   maxReplicas: 3
   metrics:

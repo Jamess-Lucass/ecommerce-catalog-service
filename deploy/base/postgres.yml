@@ -39,7 +39,7 @@ spec:
     - from:
         - podSelector:
             matchLabels:
-              app: ecommerce-catalog-service-deployment
+              app: ecommerce-catalog-service
       ports:
         - protocol: TCP
           port: 5432

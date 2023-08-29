@@ -1,10 +1,10 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: ecommerce-catalog-service-service
+  name: ecommerce-catalog-service
 spec:
   selector:
-    app: ecommerce-catalog-service-deployment
+    app: ecommerce-catalog-service
   ports:
     - protocol: TCP
       targetPort: 8080

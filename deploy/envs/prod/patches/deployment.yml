@@ -1,18 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ecommerce-catalog-service-deployment
+  name: ecommerce-catalog-service
 spec:
   template:
     spec:
       containers:
-        - name: ecommerce-catalog-service-container
+        - name: ecommerce-catalog-service
           env:
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:
-                  name: jwt-secret
-                  key: value
+                  name: ecommerce-catalog-service
+                  key: jwt_secret
+            - name: CORS_ALLOWED_ORIGINS
+              value: "https://shop.jameslucas.uk, https://internal.jameslucas.uk"
             - name: DB_HOST
               value: "ecommerce-catalog-service-postgres.default.svc"
             - name: DB_PORT
