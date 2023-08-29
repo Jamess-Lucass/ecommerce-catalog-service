@@ -10,5 +10,5 @@ type Catalog struct {
 	Images []CatalogImage    `json:"images"`
 	Likes  []CatalogUserLike `json:"-"`
 
-	IsLiked bool `json:"isLiked" gorm:"-:migration"`
+	IsLiked bool `json:"isLiked" gorm:"->"`
 }
