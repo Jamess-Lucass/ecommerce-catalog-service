@@ -25,6 +25,8 @@ func (s *Server) Start() error {
 		Logger: s.logger,
 	}))
 
+	f.Get("api/healthz", s.Healthz)
+
 	f.Get("/api/v1/catalog", middleware.OptionalJWT(), s.GetAllCatalogItems)
 	f.Post("/api/v1/catalog", middleware.JWT(), middleware.Role("Administrator", "Employee"), s.CreateCatalogItem)
 	f.Get("/api/v1/catalog/:id", middleware.OptionalJWT(), s.GetCatalogItem)
