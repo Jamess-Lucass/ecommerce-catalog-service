@@ -1,7 +1,8 @@
 package services
 
 import (
-	"github.com/valyala/fasthttp"
+	"context"
+
 	"gorm.io/gorm"
 )
 
@@ -15,7 +16,7 @@ func NewHealthService(db *gorm.DB) *HealthService {
 	}
 }
 
-func (s *HealthService) Ping(ctx *fasthttp.RequestCtx) error {
+func (s *HealthService) Ping(ctx context.Context) error {
 	db := s.db.WithContext(ctx)
 
 	sql, err := db.DB()
