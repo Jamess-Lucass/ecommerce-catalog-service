@@ -25,9 +25,11 @@ func main() {
 		logger.Sugar().Errorf("error occured migrating database: %v", err)
 	}
 
+	healthService := services.NewHealthService(db)
 	catalogService := services.NewCatalogService(db)
 	catalogUserLikesService := services.NewCatalogUserLikesService(db)
-	server := handlers.NewServer(logger, catalogService, catalogUserLikesService)
+
+	server := handlers.NewServer(logger, healthService, catalogService, catalogUserLikesService)
 
 	if err := server.Start(); err != nil {
 		logger.Sugar().Fatalf("error starting web server: %v", err)
