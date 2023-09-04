@@ -21,7 +21,7 @@ func (s *Server) CreateLikeCatalogItem(c *fiber.Ctx) error {
 		UserID:    uuid.MustParse(user.Subject),
 	}
 
-	if err := s.catalogUserLikesService.Create(catalogUserLike); err != nil {
+	if err := s.catalogUserLikesService.Create(c.Context(), catalogUserLike); err != nil {
 		return c.Status(400).JSON(err.Error())
 	}
 
@@ -42,7 +42,7 @@ func (s *Server) DeleteLikeCatalogItem(c *fiber.Ctx) error {
 		UserID:    uuid.MustParse(user.Subject),
 	}
 
-	if err := s.catalogUserLikesService.Delete(catalogUserLike); err != nil {
+	if err := s.catalogUserLikesService.Delete(c.Context(), catalogUserLike); err != nil {
 		return c.Status(400).JSON(err.Error())
 	}
 

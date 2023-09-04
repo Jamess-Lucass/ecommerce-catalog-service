@@ -6,6 +6,8 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    labels:
+      logging/enabled: "true"
     container_name: ecommerce-catalog-service
     ports:
       - 1002:8080
@@ -17,6 +19,11 @@ services:
       - DB_PASSWORD=test
       - ENVIRONMENT=development
       - JWT_SECRET=DockerTestJWTFakeSecret
+      - LOG_LEVEL=info
+      - ELASTIC_APM_SERVER_URL=http://host.docker.internal:8200
+      - ELASTIC_APM_SERVICE_NAME=catalog-service
+      - ELASTIC_APM_EXIT_SPAN_MIN_DURATION=1us
+      - ELASTIC_APM_CAPTURE_BODY=all
     depends_on:
       - postgres
     restart: on-failure

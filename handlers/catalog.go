@@ -30,10 +30,10 @@ func (s *Server) GetAllCatalogItems(c *fiber.Ctx) error {
 	user, _ := c.Locals("claims").(*middleware.Claim)
 
 	var items []models.Catalog
-	res, count, err := goatquery.Apply(s.catalogService.List(user), query, &maxTop, func(db *gorm.DB, term string) *gorm.DB {
+	res, count, err := goatquery.Apply(s.catalogService.List(c.Context(), user), query, &maxTop, func(db *gorm.DB, term string) *gorm.DB {
 		t := fmt.Sprintf("%%%s%%", term)
 		return db.Where("name like ? or description like ?", t, t)
-	})
+	}, &items)
 	if err != nil {
 		return c.Status(400).JSON(goatquery.QueryErrorResponse{Status: 400, Message: err.Error()})
 	}
@@ -56,7 +56,7 @@ func (s *Server) GetCatalogItem(c *fiber.Ctx) error {
 
 	user, _ := c.Locals("claims").(*middleware.Claim)
 
-	item, err := s.catalogService.Get(user, id)
+	item, err := s.catalogService.Get(c.Context(), user, id)
 	if err != nil {
 		return c.Status(400).JSON(err.Error())
 	}
@@ -72,7 +72,7 @@ func (s *Server) CreateCatalogItem(c *fiber.Ctx) error {
 		return c.Status(400).JSON(utils.NewError(err))
 	}
 
-	if err := s.catalogService.Create(&catalogItem); err != nil {
+	if err := s.catalogService.Create(c.Context(), &catalogItem); err != nil {
 		return c.Status(400).JSON(err.Error())
 	}
 

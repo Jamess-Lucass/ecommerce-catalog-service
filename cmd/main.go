@@ -1,23 +1,28 @@
 package main
 
 import (
+	"os"
+
 	"github.com/Jamess-Lucass/ecommerce-catalog-service/database"
 	"github.com/Jamess-Lucass/ecommerce-catalog-service/handlers"
 	"github.com/Jamess-Lucass/ecommerce-catalog-service/services"
+	"go.elastic.co/ecszap"
 	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
 
-func main() {
-	logger, err := zap.NewProduction()
-	if err != nil {
-		panic(err)
-	}
+var LOG_LEVEL = os.Getenv("LOG_LEVEL")
+var LOG_LEVELS = map[string]zapcore.Level{
+	"DEBUG": zap.DebugLevel,
+	"INFO":  zap.InfoLevel,
+	"WARN":  zap.WarnLevel,
+	"ERROR": zap.ErrorLevel,
+}
 
-	defer func() {
-		if err := logger.Sync(); err != nil {
-			logger.Sugar().Warnf("could not flush: %v", err)
-		}
-	}()
+func main() {
+	encoderConfig := ecszap.NewDefaultEncoderConfig()
+	core := ecszap.NewCore(encoderConfig, os.Stdout, LOG_LEVELS[LOG_LEVEL])
+	logger := zap.New(core, zap.AddCaller())
 
 	db := database.Connect(logger)
 

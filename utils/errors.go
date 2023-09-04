@@ -8,8 +8,12 @@ import (
 
 	"github.com/go-playground/validator/v10"
 	"github.com/gofiber/fiber/v2"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 	"gorm.io/gorm"
 )
+
+var caser = cases.Title(language.BritishEnglish)
 
 type Error struct {
 	Errors map[string][]string `json:"errors"`
@@ -53,7 +57,7 @@ func toCamelCase(str string) string {
 	key := strings.ToLower(words[0])
 
 	for _, word := range words[1:] {
-		key += strings.Title(word)
+		key += caser.String(word)
 	}
 
 	return key

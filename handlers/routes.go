@@ -5,9 +5,12 @@ import (
 	"strings"
 
 	"github.com/Jamess-Lucass/ecommerce-catalog-service/middleware"
-	"github.com/gofiber/contrib/fiberzap"
+	"github.com/gofiber/contrib/fiberzap/v2"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
+	"go.elastic.co/apm/module/apmfiber/v2"
+	"go.elastic.co/apm/v2"
+	"go.uber.org/zap"
 )
 
 func (s *Server) Start() error {
@@ -21,8 +24,16 @@ func (s *Server) Start() error {
 		MaxAge:           0,
 	}))
 
+	f.Use(middleware.SetTraceId(), apmfiber.Middleware())
+
 	f.Use(fiberzap.New(fiberzap.Config{
 		Logger: s.logger,
+		FieldsFunc: func(c *fiber.Ctx) []zap.Field {
+			tr := apm.TransactionFromContext(c.Context())
+			traceId := tr.TraceContext().Trace.String()
+
+			return []zap.Field{zap.String("trace.id", traceId)}
+		},
 	}))
 
 	f.Get("/api/healthz", s.Healthz)
@@ -35,7 +46,7 @@ func (s *Server) Start() error {
 	f.Delete("/api/v1/catalog/:id/like", middleware.JWT(), s.DeleteLikeCatalogItem)
 
 	f.Use(func(c *fiber.Ctx) error {
-		return c.Status(404).JSON(fiber.Map{"code": fiber.StatusNotFound, "message": "No resource found"})
+		return c.Status(fiber.StatusNotFound).JSON(fiber.Map{"code": fiber.StatusNotFound, "message": "No resource found"})
 	})
 
 	return f.Listen(":8080")

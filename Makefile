@@ -12,8 +12,8 @@ format:
 seed:
 	dotenv -- go run ./database/seed
 
-.PHONY: lint-docker
-lint-docker:
+.PHONY: lint
+lint:
 	docker run --rm --name ${PROJECT_NAME}-testing-client \
 		-w /src \
 		-v $(shell pwd):/src golangci/golangci-lint:latest golangci-lint run -v

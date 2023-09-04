@@ -32,7 +32,7 @@ func (r *CreateCatalogItemRequest) Bind(c *fiber.Ctx, s *services.CatalogService
 	user := c.Locals("claims").(*middleware.Claim)
 
 	var count int64
-	if err := catalogService.List(user).Where("name = ?", r.Name).Count(&count).Error; err != nil {
+	if err := catalogService.List(c.Context(), user).Where("name = ?", r.Name).Count(&count).Error; err != nil {
 		return utils.Error{Errors: map[string][]string{"Name": {"Unable to verify valid name"}}}
 	}
 
