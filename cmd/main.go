@@ -1,11 +1,13 @@
 package main
 
 import (
+	"net/http"
 	"os"
 
 	"github.com/Jamess-Lucass/ecommerce-catalog-service/database"
 	"github.com/Jamess-Lucass/ecommerce-catalog-service/handlers"
 	"github.com/Jamess-Lucass/ecommerce-catalog-service/services"
+	"go.elastic.co/apm/module/apmhttp/v2"
 	"go.elastic.co/ecszap"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -29,6 +31,8 @@ func main() {
 	if err := database.Migrate(db); err != nil {
 		logger.Sugar().Errorf("error occured migrating database: %v", err)
 	}
+
+	http.DefaultTransport = apmhttp.WrapRoundTripper(http.DefaultTransport, apmhttp.WithClientTrace())
 
 	healthService := services.NewHealthService(db)
 	catalogService := services.NewCatalogService(db)

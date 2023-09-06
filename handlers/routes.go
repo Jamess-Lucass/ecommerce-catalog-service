@@ -29,10 +29,19 @@ func (s *Server) Start() error {
 	f.Use(fiberzap.New(fiberzap.Config{
 		Logger: s.logger,
 		FieldsFunc: func(c *fiber.Ctx) []zap.Field {
-			tr := apm.TransactionFromContext(c.Context())
-			traceId := tr.TraceContext().Trace.String()
+			var fields []zap.Field
 
-			return []zap.Field{zap.String("trace.id", traceId)}
+			tx := apm.TransactionFromContext(c.Context())
+			if tx != nil {
+				traceContext := tx.TraceContext()
+				fields = append(fields, zap.String("trace.id", traceContext.Trace.String()))
+				fields = append(fields, zap.String("transaction.id", traceContext.Span.String()))
+				if span := apm.SpanFromContext(c.Context()); span != nil {
+					fields = append(fields, zap.String("span.id", span.TraceContext().Span.String()))
+				}
+			}
+
+			return fields
 		},
 	}))
 
