@@ -7,12 +7,13 @@ require (
 	github.com/go-playground/validator/v10 v10.15.3
 	github.com/goatquery/goatquery-go v0.3.0
 	github.com/gofiber/contrib/fiberzap/v2 v2.0.0
-	github.com/gofiber/fiber/v2 v2.49.1
+	github.com/gofiber/fiber/v2 v2.49.2
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/google/uuid v1.3.1
 	github.com/samber/lo v1.38.1
 	go.elastic.co/apm/module/apmfiber/v2 v2.4.4
 	go.elastic.co/apm/module/apmgormv2/v2 v2.4.4
+	go.elastic.co/apm/module/apmhttp/v2 v2.4.4
 	go.elastic.co/apm/v2 v2.4.4
 	go.elastic.co/ecszap v1.0.2
 	go.uber.org/zap v1.25.0
@@ -52,7 +53,6 @@ require (
 	github.com/valyala/fasthttp v1.49.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	go.elastic.co/apm/module/apmfasthttp/v2 v2.4.4 // indirect
-	go.elastic.co/apm/module/apmhttp/v2 v2.4.4 // indirect
 	go.elastic.co/apm/module/apmsql/v2 v2.4.4 // indirect
 	go.elastic.co/fastjson v1.3.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
