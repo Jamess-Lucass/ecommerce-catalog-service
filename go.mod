@@ -11,10 +11,10 @@ require (
 	github.com/golang-jwt/jwt/v4 v4.5.0
 	github.com/google/uuid v1.3.1
 	github.com/samber/lo v1.38.1
-	go.elastic.co/apm/module/apmfiber/v2 v2.4.4
+	go.elastic.co/apm/module/apmfiber/v2 v2.4.5
 	go.elastic.co/apm/module/apmgormv2/v2 v2.4.4
-	go.elastic.co/apm/module/apmhttp/v2 v2.4.4
-	go.elastic.co/apm/v2 v2.4.4
+	go.elastic.co/apm/module/apmhttp/v2 v2.4.5
+	go.elastic.co/apm/v2 v2.4.5
 	go.elastic.co/ecszap v1.0.2
 	go.uber.org/zap v1.26.0
 	golang.org/x/text v0.13.0
@@ -52,7 +52,7 @@ require (
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	github.com/valyala/fasthttp v1.49.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
-	go.elastic.co/apm/module/apmfasthttp/v2 v2.4.4 // indirect
+	go.elastic.co/apm/module/apmfasthttp/v2 v2.4.5 // indirect
 	go.elastic.co/apm/module/apmsql/v2 v2.4.4 // indirect
 	go.elastic.co/fastjson v1.3.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
