@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/brianvoe/gofakeit/v6 v6.23.2
-	github.com/go-playground/validator/v10 v10.15.4
+	github.com/go-playground/validator/v10 v10.16.0
 	github.com/goatquery/goatquery-go v0.3.0
 	github.com/gofiber/contrib/fiberzap/v2 v2.0.0
 	github.com/gofiber/fiber/v2 v2.49.2
