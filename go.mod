@@ -14,7 +14,7 @@ require (
 	go.elastic.co/apm/module/apmfiber/v2 v2.4.4
 	go.elastic.co/apm/module/apmgormv2/v2 v2.4.4
 	go.elastic.co/apm/module/apmhttp/v2 v2.4.4
-	go.elastic.co/apm/v2 v2.4.4
+	go.elastic.co/apm/v2 v2.4.8
 	go.elastic.co/ecszap v1.0.2
 	go.uber.org/zap v1.26.0
 	golang.org/x/text v0.13.0
