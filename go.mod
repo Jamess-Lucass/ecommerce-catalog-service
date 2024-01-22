@@ -12,12 +12,12 @@ require (
 	github.com/google/uuid v1.3.1
 	github.com/samber/lo v1.38.1
 	go.elastic.co/apm/module/apmfiber/v2 v2.4.4
-	go.elastic.co/apm/module/apmgormv2/v2 v2.4.4
+	go.elastic.co/apm/module/apmgormv2/v2 v2.4.8
 	go.elastic.co/apm/module/apmhttp/v2 v2.4.4
-	go.elastic.co/apm/v2 v2.4.4
+	go.elastic.co/apm/v2 v2.4.8
 	go.elastic.co/ecszap v1.0.2
 	go.uber.org/zap v1.26.0
-	golang.org/x/text v0.13.0
+	golang.org/x/text v0.14.0
 	gorm.io/gorm v1.25.4
 )
 
@@ -53,13 +53,13 @@ require (
 	github.com/valyala/fasthttp v1.49.0 // indirect
 	github.com/valyala/tcplisten v1.0.0 // indirect
 	go.elastic.co/apm/module/apmfasthttp/v2 v2.4.4 // indirect
-	go.elastic.co/apm/module/apmsql/v2 v2.4.4 // indirect
+	go.elastic.co/apm/module/apmsql/v2 v2.4.8 // indirect
 	go.elastic.co/fastjson v1.3.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/crypto v0.12.0 // indirect
+	golang.org/x/crypto v0.17.0 // indirect
 	golang.org/x/exp v0.0.0-20230817173708-d852ddb80c63 // indirect
 	golang.org/x/net v0.14.0 // indirect
-	golang.org/x/sys v0.12.0 // indirect
+	golang.org/x/sys v0.15.0 // indirect
 	gorm.io/driver/postgres v1.5.2 // indirect
 	howett.net/plist v1.0.0 // indirect
 )
